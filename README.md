@@ -1,3 +1,4 @@
+Register : https://form.zootools.co/go/Qkr0xCL2rXK0nY39DAO2?ref=J26dwc9nXnMNJhIj7wgq
 # Pison Auto Referral Bot
 
 Bot otomatis untuk program referral Pison dengan fitur auto-solve captcha menggunakan 2captcha.
