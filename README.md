@@ -64,7 +64,8 @@ Bot otomatis untuk program referral Pison dengan fitur:
    ```bash
    # Windows
    python reff.py
-
+   ```
+   ```bash
    # Linux
    python3 reff.py
    ```
