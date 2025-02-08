@@ -19,6 +19,8 @@ Bot otomatis untuk program referral Pison dengan fitur auto-solve captcha menggu
 
 ## Cara Install
 
+git clone https://github.com/cuansegar/pison-autoreff && cd pison-autoreff
+
 ### Windows
 1. Download dan install Python 3.x dari [python.org](https://python.org)
 2. Buka Command Prompt sebagai Administrator
