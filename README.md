@@ -25,7 +25,7 @@ Bot otomatis untuk program referral Pison dengan fitur auto-solve captcha menggu
 2. Install Python 3.x dari [python.org](https://python.org)
 3. Clone repository:
 ```bash
-git clone https://github.com/cuansegar/pison-bot
+git clone https://github.com/cuansegar/pison-autoreff
 cd pison-bot
 ```
 4. Install requests:
@@ -40,7 +40,7 @@ sudo apt update
 sudo apt install git python3 python3-pip
 
 # Clone repository
-git clone https://github.com/cuansegar/pison-bot
+git clone https://github.com/cuansegar/pison-autoreff
 cd pison-bot
 
 # Install requests
