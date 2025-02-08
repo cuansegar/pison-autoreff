@@ -11,29 +11,37 @@ Bot otomatis untuk program referral Pison dengan fitur auto-solve captcha menggu
 - Summary hasil referral
 
 ## Persyaratan
-1. Python 3.x
-2. Package `requests`
-3. Akun 2captcha.com
-4. Saldo 2captcha minimal $2-3
-5. Kode referral Pison yang valid
+1. Git
+2. Python 3.x
+3. Package `requests`
+4. Akun 2captcha.com
+5. Saldo 2captcha minimal $2-3
+6. Kode referral Pison yang valid
 
 ## Cara Install
 
-git clone https://github.com/cuansegar/pison-autoreff && cd pison-autoreff
-
 ### Windows
-1. Download dan install Python 3.x dari [python.org](https://python.org)
-2. Buka Command Prompt sebagai Administrator
-3. Install requests:
+1. Install Git dari [git-scm.com](https://git-scm.com)
+2. Install Python 3.x dari [python.org](https://python.org)
+3. Clone repository:
+```bash
+git clone https://github.com/cuansegar/pison-bot.git
+cd pison-bot
+```
+4. Install requests:
 ```bash
 pip install requests
 ```
 
 ### Linux/macOS
 ```bash
-# Install Python
+# Install Git & Python
 sudo apt update
-sudo apt install python3 python3-pip
+sudo apt install git python3 python3-pip
+
+# Clone repository
+git clone https://github.com/cuansegar/pison-bot.git
+cd pison-bot
 
 # Install requests
 pip3 install requests
@@ -46,22 +54,16 @@ pip3 install requests
    - Deposit saldo (min. $2-3)
    - Copy API key dari menu API Setup
 
-2. **Download Bot**
-   - Download file `bot.py`
-   - Simpan di folder yang mudah diakses
-
-3. **Jalankan Bot**
-   - Buka Command Prompt/Terminal
-   - Masuk ke folder bot:
+2. **Jalankan Bot**
    ```bash
-   cd path/to/bot/folder
-   ```
-   - Jalankan bot:
-   ```bash
+   # Windows
    python bot.py
+   
+   # Linux/macOS
+   python3 bot.py
    ```
 
-4. **Input yang Diperlukan**
+3. **Input yang Diperlukan**
 ```
 [?] Masukkan API Key 2captcha: <PASTE_API_KEY_DISINI>
 [?] Masukkan kode referral: <KODE_REFERRAL_PISON>
@@ -94,22 +96,31 @@ pip3 install requests
 
 ## Troubleshooting
 
-### 1. Error Captcha
+### 1. Error Git Clone
+```
+fatal: repository not found
+```
+➜ **Solusi**: 
+- Pastikan URL repository benar
+- Cek koneksi internet
+- Pastikan Git terinstall: `git --version`
+
+### 2. Error Python/PIP
+```
+'python' is not recognized...
+```
+➜ **Solusi**: 
+- Pastikan Python terinstall: `python --version`
+- Tambahkan Python ke PATH
+- Coba gunakan `python3` untuk Linux/macOS
+
+### 3. Error Captcha
 ```
 [-] Error solving captcha: ERROR_ZERO_BALANCE
 ```
 ➜ **Solusi**: Isi saldo 2captcha
 
-### 2. Error Koneksi
-```
-[-] Error: Connection timeout
-```
-➜ **Solusi**: 
-- Cek koneksi internet
-- Coba ganti DNS
-- Gunakan VPN jika perlu
-
-### 3. Error Rate Limit
+### 4. Error Rate Limit
 ```
 [-] Gagal: {"error":"Too many requests"}
 ```
@@ -120,10 +131,11 @@ pip3 install requests
 
 ## Tips Penting
 
-1. **Hindari Spam**
-   - Jangan set jumlah terlalu banyak
-   - Gunakan delay default (3-7 detik)
-   - Monitor hasil di dashboard
+1. **Update Bot**
+```bash
+cd pison-bot
+git pull origin main
+```
 
 2. **Optimasi Biaya**
    - 1 solve captcha ≈ $0.002
@@ -153,6 +165,5 @@ pip3 install requests
 ## Support
 
 Butuh bantuan? Hubungi:
-- Telegram: @AirdropFamilyIDN
+- Telegram: @AirdropFamilyIDN x @ntrcd00
 - Join channel untuk update terbaru
-
