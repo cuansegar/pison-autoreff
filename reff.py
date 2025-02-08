@@ -30,12 +30,13 @@ class ReferralBot:
         self.session = self.create_session()
         self.client_id = str(uuid.uuid4())
         self.max_retries = 5
-        self.base_delay = 3   
-        self.max_delay = 10   
+        self.base_delay = 5   
+        self.max_delay = 20   
         self.last_verify_time = 0
-        self.verify_interval = 30  
-        self.session_lifetime = 300  
+        self.verify_interval = 60  
+        self.session_lifetime = 180  
         self.last_session_time = time.time()
+        self.user_agents = self.load_user_agents()
 
     def create_session(self):
         """Buat session baru dengan konfigurasi optimal"""
@@ -65,6 +66,16 @@ class ReferralBot:
             return True
         return False
 
+    def load_user_agents(self):
+        """Load list of user agents untuk rotasi"""
+        return [
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:122.0) Gecko/20100101 Firefox/122.0",
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Edge/121.0.0.0"
+        ]
+
     def update_headers(self):
         """Update headers dengan random user agent dan tambahan headers"""
         self.headers = {
@@ -79,7 +90,7 @@ class ReferralBot:
             "sec-fetch-dest": "empty",
             "sec-fetch-mode": "cors",
             "sec-fetch-site": "same-site",
-            "user-agent": ua.random,
+            "user-agent": random.choice(self.user_agents),
             "x-client-id": self.client_id,
             "Accept-Encoding": "gzip, deflate, br",
             "Cache-Control": "no-cache",
@@ -87,6 +98,7 @@ class ReferralBot:
             "DNT": "1"
         }
         self.session.headers.update(self.headers)
+        time.sleep(random.uniform(1, 3))  
 
     def should_verify(self):
         """Cek apakah perlu verifikasi ulang"""
@@ -268,7 +280,7 @@ class ReferralBot:
         if self.should_verify():
             if not self.verify_bot(referrer_code):
                 print(f"{Colors.RED}[-] Gagal verifikasi, tunggu sebelum retry...{Colors.RESET}")
-                time.sleep(10)
+                time.sleep(random.uniform(10, 15))  
                 return False
             
         payload = {
@@ -390,9 +402,9 @@ def main():
                 continue
                 
             # Submit referral dengan delay dinamis
-            delay = min(max(5, failed/5), 15)  # Delay 5-15 detik berdasarkan jumlah kegagalan
+            delay = min(max(8, failed/3), 20)  
             print(f"{Colors.BLUE}[*] Delay {delay:.1f} detik sebelum submit...{Colors.RESET}")
-            time.sleep(delay)
+            time.sleep(delay + random.uniform(1, 5))  
             
             if bot.submit_referral(email, referral_code, captcha):
                 success += 1
