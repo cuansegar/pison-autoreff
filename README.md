@@ -1,168 +1,178 @@
-Register : https://form.zootools.co/go/Qkr0xCL2rXK0nY39DAO2?ref=J26dwc9nXnMNJhIj7wgq
-# Pison Auto Referral Bot
+Register: https://form.zootools.co/go/Qkr0xCL2rXK0nY39DAO2?ref=J26dwc9nXnMNJhIj7wgq
+# Pison Referral Bot
 
-Bot otomatis untuk program referral Pison dengan fitur auto-solve captcha menggunakan 2captcha.
-
-## Fitur Utama
-- Auto generate random email
-- Auto solve captcha via 2captcha
-- Auto submit referral ke Pison
-- Progress tracking real-time
-- Random delay anti-detect
-- Summary hasil referral
+Bot otomatis untuk program referral Pison dengan fitur:
+- Auto submit referral dengan email random
+- Captcha solver menggunakan 2captcha
+- Random user agent untuk menghindari deteksi
+- Sistem retry dengan exponential backoff
+- Rate limit handling yang optimal
+- Session management otomatis
+- Statistik realtime dan summary
+- Output berwarna untuk monitoring
 
 ## Persyaratan
-1. Git
-2. Python 3.x
-3. Package `requests`
-4. Akun 2captcha.com
-5. Saldo 2captcha minimal $2-3
-6. Kode referral Pison yang valid
 
-## Cara Install
+- Python 3.7+
+- 2captcha API key (https://2captcha.com)
+- Kode referral Pison yang valid
+- Koneksi internet yang stabil
+
+## Instalasi
 
 ### Windows
-1. Install Git dari [git-scm.com](https://git-scm.com)
-2. Install Python 3.x dari [python.org](https://python.org)
+
+1. Install Python:
+   - Download Python 3.7+ dari [python.org](https://www.python.org/downloads/)
+   - **PENTING**: Centang "Add Python to PATH" saat instalasi
+
+2. Install Git:
+   - Download Git dari [git-scm.com](https://git-scm.com/download/win)
+   - Install dengan opsi default
+
 3. Clone repository:
-```bash
-git clone https://github.com/cuansegar/pison-autoreff && cd pison-autoreff
-```
-4. Install requests:
-```bash
-pip install requests
-```
-
-### Linux/macOS
-```bash
-# Install Git & Python
-sudo apt update
-sudo apt install git python3 python3-pip
-
-# Clone repository
-git clone https://github.com/cuansegar/pison-autoreff && cd pison-autoreff
-
-# Install requests
-pip3 install requests
-```
-
-## Cara Menjalankan Bot
-
-1. **Persiapan 2captcha**
-   - Daftar di [2captcha.com](https://2captcha.com)
-   - Deposit saldo (min. $2-3)
-   - Copy API key dari menu API Setup
-
-2. **Jalankan Bot**
    ```bash
-   # Windows
-   python bot.py
-   
-   # Linux/macOS
-   python3 bot.py
+   git clone https://github.com/cuansegar/pison-autoreff && cd pison-autoreff
    ```
 
-3. **Input yang Diperlukan**
+4. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Linux (Ubuntu/Debian)
+
+1. Install dependencies sistem:
+   ```bash
+   sudo apt update
+   sudo apt install -y python3 python3-pip git
+   ```
+
+2. Clone repository:
+   ```bash
+   git clone https://github.com/cuansegar/pison-autoreff && cd pison-autoreff
+   ```
+
+3. Install dependencies Python:
+   ```bash
+   pip3 install -r requirements.txt
+   ```
+
+## Penggunaan
+
+1. Jalankan bot:
+   ```bash
+   # Windows
+   python reff.py
+
+   # Linux
+   python3 reff.py
+   ```
+
+2. Masukkan informasi yang diminta:
+   - API Key 2captcha
+   - Kode referral Pison
+   - Jumlah referral yang diinginkan
+
+3. Bot akan mulai bekerja secara otomatis dengan:
+   - Verifikasi koneksi setiap 30 detik
+   - Reset session setiap 5 menit
+   - Delay dinamis 5-15 detik antara submit
+   - Retry otomatis jika terkena rate limit
+
+## Fitur Detail
+
+1. **Email Generator**
+   - Generate email random dengan domain populer
+   - Format: [random10char]@[domain]
+   - Domain: gmail.com, yahoo.com, outlook.com, hotmail.com
+
+2. **Session Management**
+   - Auto reset setiap 5 menit
+   - Keep-alive connection
+   - Connection pooling
+   - Random user agent
+
+3. **Rate Limit Handler**
+   - Exponential backoff
+   - Delay dinamis berdasarkan jumlah kegagalan
+   - Auto retry dengan verifikasi ulang
+
+4. **Statistik Realtime**
+   - Success/failed counter
+   - Rate referral per detik
+   - Total waktu berjalan
+   - Progress (X/Total)
+
+## Menjalankan di Background
+
+### Linux Screen
+```bash
+screen -S pison
+python3 reff.py
+# Detach: Ctrl+A kemudian D
+# Reattach: screen -r pison
 ```
-[?] Masukkan API Key 2captcha: <PASTE_API_KEY_DISINI>
-[?] Masukkan kode referral: <KODE_REFERRAL_PISON>
-[?] Masukkan jumlah referral: <JUMLAH>
-```
 
-## Status dan Output
-
-### Keterangan Status
-- `[*]` = Informasi/proses
-- `[+]` = Berhasil
-- `[-]` = Gagal/error
-- `[?]` = Input yang diminta
-
-### Contoh Output
-```
-[*] Memulai solve captcha...
-[+] Captcha submitted, ID: 12345678
-[*] Menunggu hasil captcha...
-[+] Captcha solved!
-
-[*] Mencoba mendaftarkan: abc123@gmail.com
-[*] Kode referral: REF123
-[+] Berhasil mendaftarkan abc123@gmail.com
-[+] Member ID: xxxxx
-[+] Ranking: 123
-
-[*] Delay 5.2 detik...
-```
+### Windows Task Scheduler
+1. Buka Task Scheduler
+2. Create Basic Task
+3. Action: Start a Program
+4. Program: python
+5. Arguments: reff.py
+6. Start in: C:\path\to\pison-bot
 
 ## Troubleshooting
 
-### 1. Error Git Clone
-```
-fatal: repository not found
-```
-➜ **Solusi**: 
-- Pastikan URL repository benar
-- Cek koneksi internet
-- Pastikan Git terinstall: `git --version`
-
-### 2. Error Python/PIP
-```
-'python' is not recognized...
-```
-➜ **Solusi**: 
-- Pastikan Python terinstall: `python --version`
-- Tambahkan Python ke PATH
-- Coba gunakan `python3` untuk Linux/macOS
-
-### 3. Error Captcha
-```
-[-] Error solving captcha: ERROR_ZERO_BALANCE
-```
-➜ **Solusi**: Isi saldo 2captcha
-
-### 4. Error Rate Limit
-```
-[-] Gagal: {"error":"Too many requests"}
-```
-➜ **Solusi**:
-- Tunggu 5-10 menit
-- Tambah delay (edit nilai di kode)
-- Ganti IP address
-
-## Tips Penting
-
-1. **Update Bot**
-```bash
-cd pison-bot
-git pull origin main
-```
-
-2. **Optimasi Biaya**
-   - 1 solve captcha ≈ $0.002
-   - Contoh: 100 referral = $0.2
-
-3. **Keamanan**
-   - Jangan share API key
-   - Gunakan VPN jika perlu
-   - Monitor aktivitas akun
-
-## Cara Menghentikan Bot
-
-1. **Hentikan Manual**
-   - Tekan `Ctrl+C`
-   - Bot akan menampilkan summary:
+1. **SSL Error**
    ```
-   === Summary ===
-   [+] Berhasil: 45
-   [-] Gagal: 5
-   [*] Total: 50
+   [!] SSL Error, mencoba tanpa verifikasi SSL...
    ```
+   - Bot akan retry otomatis tanpa SSL
+   - Jika masih error, update Python dan OpenSSL
 
-2. **Auto Stop**
-   - Bot berhenti otomatis setelah jumlah tercapai
-   - Atau jika terjadi error fatal
+2. **Rate Limit**
+   ```
+   [!] Rate limit terdeteksi, tunggu...
+   ```
+   - Bot akan menunggu dengan delay yang meningkat
+   - Verifikasi ulang otomatis
+
+3. **Captcha Error**
+   ```
+   [-] Error solving captcha...
+   ```
+   - Cek saldo 2captcha
+   - Verifikasi API key
+   - Bot akan skip ke referral berikutnya
+
+## Tips Optimal
+
+1. **Kecepatan**
+   - Mulai dengan jumlah kecil (5-10)
+   - Tingkatkan bertahap jika stabil
+   - Monitor success rate
+
+2. **Rate Limit**
+   - Gunakan VPN jika terlalu sering limit
+   - Biarkan bot mengatur delay otomatis
+   - Jangan ubah delay default
+
+3. **Biaya**
+   - Monitor saldo 2captcha
+   - Harga per captcha ±$0.002
+   - Isi saldo sesuai target referral
 
 ## Support
 
-Butuh bantuan? Hubungi:
-- Telegram: @AirdropFamilyIDN x @ntrcd00
-- Join channel untuk update terbaru
+Jika ada masalah atau pertanyaan:
+- Telegram: @AirdropFamilyIDN
+- Telegram: @ntrcd00
+
+## Disclaimer
+
+Bot ini dibuat untuk tujuan edukasi. Gunakan dengan bijak dan sesuai Terms of Service platform target.
+
+## License
+
+MIT License - Silakan gunakan dan modifikasi sesuai kebutuhan.
