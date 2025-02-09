@@ -164,11 +164,6 @@ python3 reff.py
    - Harga per captcha ±$0.002
    - Isi saldo sesuai target referral
 
-## Support
-
-Jika ada masalah atau pertanyaan:
-- Telegram: @AirdropFamilyIDN
-- Telegram: @ntrcd00
 
 ## Disclaimer
 
